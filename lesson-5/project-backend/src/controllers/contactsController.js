@@ -9,7 +9,7 @@ export const getContacts = async (req, res) => {
 
 export const getContactById = async (req, res) => {
   const { id } = req.params;
-  const contact = await Contact.findOne({_id: id});
+  const contact = await Contact.findOne({_id: id}); // throw new Error()
   if (!contact) {
     throw createHttpError(404, `Contact with id=${id} not found`);
   }
@@ -23,9 +23,7 @@ export const addContact = async (req, res) => {
 
 export const updateContactById = async (req, res) => {
   const { id } = req.params;
-  const updateContact = await Contact.findOneAndUpdate({ _id: id }, req.body, {
-    returnDocument: 'after',
-  });
+  const updateContact = await Contact.findOneAndUpdate({ _id: id }, req.body);
   if (!updateContact) {
     throw createHttpError(404, `Contact with id=${id} not found`);
   }
